@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quem você é em Dragon Ball?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Quem é você em Dragon Ball?</h1>
+    </header>
+    <main>
+        <div class="container">
+            <div class="conteudo">
+                <form action="/" method="post">
+                    <label for="nome">Informe seu nome:</label>
+                    <input type="text" id="nome" name="nome">
+                    <label for="idade">Informe sua idade:</label>
+                    <input type="text" id="idade" name="idade"/>
+                    <button type="submit">Enviar</button>
+                </form>
+
+                
+
+                {% if url_imagem %}
+                    <img src="{{ url_imagem }}" alt="{{ nome }}"/>
+                    <p>Nome: {{ nome }}</p>
+                    <p>Raça: {{ raca }}</p>
+                    <p>Afiliação: {{ afiliacao }}</p>
+                {% else %}
+                    <img src="{{ url_for('static', filename='img/placeholder.png') }}" alt="Imagem do personagem não encontrada"/>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Desenvolvido por Thimotio Jeronimo</p>
+    </footer>
+</body>
+</html>
