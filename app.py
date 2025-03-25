@@ -1,9 +1,11 @@
 from flask import Flask, render_template, request
 import requests
+import random
 
 app = Flask(__name__)
 
 API_ENDPOINT = "https://dragonball-api.com/api/characters"
+NUM_PERSONAGENS = 44  # Número total de personagens na API
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -14,7 +16,9 @@ def index():
             return render_template('index.html', erro="Informe uma idade válida entre 1 e 100")
 
         idade = int(idade)
-        personagem_id = (idade - 1) % 44 + 1 
+        # Gera um ID aleatório baseado na idade, para garantir alguma variação
+        random.seed(idade)  # Usa a idade como semente para o gerador aleatório
+        personagem_id = random.randint(1, NUM_PERSONAGENS)
 
         try:
             response = requests.get(f"{API_ENDPOINT}/{personagem_id}", verify=False)
